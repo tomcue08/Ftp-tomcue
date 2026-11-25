@@ -22,7 +22,9 @@ jobs:
           mkdir -p lib
           cp /tmp/main.dart lib/main.dart
           sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' android/app/src/main/AndroidManifest.xml
-          sed -i -E 's/compileSdk(Version)?[ =]+flutter\.compileSdkVersion/compileSdk = 36/' android/app/build.gradle*
+          sed -i -E 's/^([[:space:]]*)compileSdk(Version)?[[:space:]]*=?[[:space:]]*.*/\1compileSdk = 36/' android/app/build.gradle*
+          echo "=== REVISION compileSdk ==="
+          grep -n "compileSdk" android/app/build.gradle*
           flutter pub get
           flutter build apk --release
       - uses: actions/upload-artifact@v4
