@@ -17,12 +17,12 @@ jobs:
       - name: Build
         run: |
           SRC="$(find . -name main.dart -not -path './.git/*' | head -n 1)"
-          echo "main.dart encontrado en: $SRC"
           cp "$SRC" /tmp/main.dart
           flutter create --platforms=android --org com.ps4ftp .
           mkdir -p lib
           cp /tmp/main.dart lib/main.dart
           sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' android/app/src/main/AndroidManifest.xml
+          sed -i -E 's/compileSdk(Version)?[ =]+flutter\.compileSdkVersion/compileSdk = 36/' android/app/build.gradle*
           flutter pub get
           flutter build apk --release
       - uses: actions/upload-artifact@v4
