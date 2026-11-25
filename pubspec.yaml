@@ -1,0 +1,13 @@
+name: ps4_ftp
+description: Cliente FTP para PS4
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  ftpconnect: ^2.0.5
+  file_picker: ^8.0.0
+flutter:
+  uses-material-design: true
