@@ -15,13 +15,7 @@ jobs:
         with:
           channel: stable
       - name: Build
-        run: |
-          cp main.dart /tmp/main.dart
-          flutter create --platforms=android --org com.ps4ftp .
-          cp /tmp/main.dart lib/main.dart
-          sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' android/app/src/main/AndroidManifest.xml
-          flutter pub get
-          flutter build apk --release
+        run: cp "$(find . -name main.dart -not -path './.git/*' | head -n 1)" /tmp/main.dart
       - uses: actions/upload-artifact@v4
         with:
           name: ps4-ftp-apk
