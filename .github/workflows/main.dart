@@ -146,7 +146,7 @@ class _HomeState extends State<Home> {
           const Text('Contenido', style: TextStyle(fontWeight: FontWeight.bold)),
           ...entries.map((e) => ListTile(
               dense: true,
-              leading: Icon(e.type == FTPEntryType.DIR ? Icons.folder : Icons.insert_drive_file),
+              leading: Icon(e.type.toString().toLowerCase().contains('dir') ? Icons.folder : Icons.insert_drive_file),
               title: Text(e.name),
               subtitle: e.size != null ? Text('${(e.size! / 1048576).toStringAsFixed(1)} MB') : null)),
         ],
